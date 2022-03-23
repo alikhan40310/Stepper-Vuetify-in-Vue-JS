@@ -1,56 +1,58 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-container>
+    <v-app>
+      
+      <v-app-bar app  color="primary" class="containers" :class="containers" dark width="100%" >
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+        <div class="d-flex align-center">
+          <v-img
+            alt="Vuetify Logo"
+            class="shrink mr-2"
+            contain
+            src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+            transition="scale-transition"
+            width="40"
+          />
 
-      <v-spacer></v-spacer>
+          <v-img
+            alt="Vuetify Name"
+            class="shrink mt-1 hidden-sm-and-down co"
+            contain
+            min-width="100"
+            src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+            width="100"
+          />
+        </div>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-spacer></v-spacer>
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+        <v-btn href="#" target="_blank" text>
+          <span class="mr-2">Latest Release</span>
+          <v-icon>mdi-open-in-new</v-icon>
+        </v-btn>
+        
+      </v-app-bar>
+
+      <v-main>
+        <HelloWorld />
+        <Form />
+      </v-main>
+    </v-app>
+  </v-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import HelloWorld from "./components/HelloWorld";
+// import component form
+import Form from "./components/Form";
+
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
     HelloWorld,
+    Form,
   },
 
   data: () => ({
@@ -58,3 +60,9 @@ export default {
   }),
 };
 </script>
+<style>
+  .containers{
+    background: coral;
+    max-width: 70%;
+  }
+</style>
