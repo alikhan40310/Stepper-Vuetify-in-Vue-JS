@@ -13,16 +13,18 @@
 
       <v-divider></v-divider>
 
-      <v-stepper-step step="3"> Question no 3 </v-stepper-step>
-      <v-divider></v-divider>
-
       <v-stepper-step :complete="e1 > 3" step="3">
-        Question no 4
+        Question no 3
       </v-stepper-step>
       <v-divider></v-divider>
 
       <v-stepper-step :complete="e1 > 4" step="4">
-        Question no 5
+        Question no 4
+      </v-stepper-step>
+      <v-divider></v-divider>
+
+      <v-stepper-step :complete="e1 > 5" step="5">
+        Question no 4
       </v-stepper-step>
     </v-stepper-header>
 
@@ -33,22 +35,26 @@
             You’ve been sitting in the doctor’s waiting room for more than 25
             minutes. You:
           </h1>
-          <v-radio-group v-model="column" column>
-            <v-radio
-              label=" Look at your watch every two minutes "
+          <v-radio-group v-model="column" column >
+            <v-radio v-for="(score, index) in scores" :key="index"
+              label="1"
               value="radio-1"
+              v-model="score.value"
             ></v-radio>
             <v-radio
               label="Bubble with inner anger, but keep quiet "
               value="radio-2"
+             v-model="score.score"
             ></v-radio>
             <v-radio
               label="Explain to other equally impatient people in the room that the doctor is always running late  "
               value="radio-3"
+              v-model="score.score"
             ></v-radio>
             <v-radio
               label=" Complain in a loud voice, while tapping your foot impatiently "
               value="radio-4"
+              v-model="score.score"
             ></v-radio>
           </v-radio-group>
         </v-card>
@@ -58,31 +64,115 @@
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
-
+        <v-card>
+          <h1 class="text">
+            You’re really busy at work and a colleague is telling you their life story and personal woes. You: 
+          </h1>
+          <v-radio-group v-model="column" column>
+            <v-radio
+              label="  Don’t dare to interrupt them  "
+              value="second-1"
+            ></v-radio>
+            <v-radio
+              label="Think it’s more important to give them some of your time; work can wait  "
+              value="second-2"
+            ></v-radio>
+            <v-radio
+              label=" Listen, but with only with half an ear  "
+              value="second-3"
+            ></v-radio>
+            <v-radio
+              label="  Interrupt and explain that you are really busy at the moment  "
+              value="second-4"
+            ></v-radio>
+          </v-radio-group>
+        </v-card>
         <v-btn color="primary" @click="e1 = 3"> Continue </v-btn>
 
         <v-btn text @click="backFunc"> Back </v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="3">
-        <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
-
-        <v-btn color="primary" @click="e1 = 3"> Continue </v-btn>
-
-        <v-btn text @click="backFunc"> Back </v-btn>
-      </v-stepper-content>
-      <v-stepper-content step="4">
-        <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
-
+        <v-card>
+          <h1 class="text">
+           You are taking part in a guided tour of a museum. You:
+          </h1>
+          <v-radio-group v-model="column" column>
+            <v-radio
+              label="Are a bit too far towards the back so don’t really hear what the guide is saying "
+              value="third-1"
+            ></v-radio>
+            <v-radio
+              label="Follow the group without question "
+              value="third-2"
+            ></v-radio>
+            <v-radio
+              label=" Make sure that everyone is able to hear properly  "
+              value="third-3"
+            ></v-radio>
+            <v-radio
+              label="Are right up the front, adding your own comments in a loud voice "
+              value="third-4"
+            ></v-radio>
+          </v-radio-group>
+        </v-card>
         <v-btn color="primary" @click="e1 = 4"> Continue </v-btn>
 
         <v-btn text @click="backFunc"> Back </v-btn>
       </v-stepper-content>
-      <v-stepper-content step="5">
-        <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
-
+      <v-stepper-content step="4">
+        <v-card>
+          <h1 class="text">
+            During dinner parties at your home, you have a hard time with people who: 
+          </h1>
+          <v-radio-group v-model="column" column>
+            <v-radio
+              label=" Ask you to tell a story in front of everyone else "
+              value="fourth-1"
+            ></v-radio>
+            <v-radio
+              label=" Talk privately between themselves "
+              value="fourth-2"
+            ></v-radio>
+            <v-radio
+              label="Hang around you all evening  "
+              value="fourth-3"
+            ></v-radio>
+            <v-radio
+              label="Always drag the conversation back to themselves  "
+              value="fourth-4"
+            ></v-radio>
+          </v-radio-group>
+        </v-card>
         <v-btn color="primary" @click="e1 = 5"> Continue </v-btn>
+
+        <v-btn text @click="backFunc"> Back </v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="5">
+        <v-card>
+          <h1 class="text">
+            You crack a joke at work, but nobody seems to have noticed. You: 
+          </h1>
+          <v-radio-group v-model="column" column>
+            <v-radio
+              label=" Think it’s for the best — it was a lame joke anyway  "
+              value="fivth-1"
+            ></v-radio>
+            <v-radio
+              label="Wait to share it with your friends after work  "
+              value="fivth-2"
+            ></v-radio>
+            <v-radio
+              label="Try again a bit later with one of your colleagues  "
+              value="fivth-3"
+            ></v-radio>
+            <v-radio
+              label=" Keep telling it until they pay attention "
+              value="fivth-4"
+            ></v-radio>
+          </v-radio-group>
+        </v-card>
+        <v-btn color="primary" @click="e1 = 6"> Continue </v-btn>
 
         <v-btn text @click="backFunc"> Back </v-btn>
       </v-stepper-content>
@@ -96,6 +186,29 @@ export default {
   data() {
     return {
       e1: 1,
+      question: [
+        {
+          title: "You are in a meeting with a colleague. You:",
+          value: "2.5",
+      },
+      {
+        title: "You are in a meeting with a colleague. You:",
+        value: "2.5",
+      }
+      ],
+      marks: [
+        {
+          title: "You are in a meeting with a colleague. You:",
+          value: "2.5",
+      },
+      {
+        title: "You are in a meeting with a colleague. You:",
+        value: "2.5",
+      }
+      ],
+      column: "",
+      score: 0,
+      scores: [],
     };
   },
   methods: {
@@ -108,4 +221,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+</style>
