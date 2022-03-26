@@ -28,22 +28,22 @@
       </v-stepper-step>
     </v-stepper-header>
 
-    <v-stepper-items >
-      <v-stepper-content step="1" >
-        <v-card>
-          <h1 class="text">
-            {{ questions[0].heading }}
-          </h1>
-            <v-radio-group v-model="e1">
-            <v-radio
-              v-for="(question, index) in questions"
-              :key="index"
-              :label="question.options"
-              :value="question.value"
-            >
-            </v-radio>
-          </v-radio-group>
-        </v-card>
+    <v-stepper-items>
+      <v-stepper-content step="1" v-if="index < count">
+        <div v-for="(answer, key) in questions[index]['answers']" :key="key">
+          <p class="text-2xl font-bold">
+            {{ questions[index]["question"] }}
+          </p>
+
+          <v-radio
+            :label=" answer"
+            class="hidden"
+            :value="key"
+            @change="answered($event)"
+            v-model="selectedAnswer"
+            :disabled="selectedAnswer != ''"
+          ></v-radio>
+        </div>
         <v-btn color="primary" @click="e1 = 2"> Continue </v-btn>
 
         <v-btn text @click="backFunc"> Back </v-btn>
@@ -174,56 +174,41 @@ export default {
   data() {
     return {
       e1: 1,
+      index: 0,
+      selectedAnswer: "",
+      correctAnswer: 0,
+      wrongAnswer: 0,
+      count: 3,
       questions: [
         {
-          heading:
-            "You are in a meeting with a colleague and you are really busy. You:",
-          options: [
-            "Don't bother to interrupt them",
-            "Think it's more important to give them some of your time; work can wait",
-            "Listen, but with only with half an ear",
-            "Interrupt and explain that you are really busy at the moment",
-          ],
-          value: 1,
+          question: "Q1. Who create python  language?",
+          answers: {
+            a: "Guido van Rossum",
+            b: "Kristen Nygaard",
+            c: "Bjarne Stroustrup",
+            d: "Ole-Johan Dahl",
+          },
+          correctAnswer: "a",
         },
         {
-          heading:
-            "You’re really busy at work and a colleague is telling you their life story and personal woes. You:",
-          options: [
-            "Don't dare to interrupt them",
-            "Think it's more important to give them some of your time; work can wait",
-            " Listen, but with only with half an ear",
-            "Interrupt and explain that you are really busy at the moment",
-          ],
+          question: "Q2. What does PEP stand for in python?",
+          answers: {
+            a: "name of parentehes parameters",
+            b: "python english processing",
+            c: "Python Enhancement Proposal",
+            d: "PyPi",
+          },
+          correctAnswer: "c",
         },
         {
-          heading: "You are taking part in a guided tour of a museum. You:",
-          options: [
-            "Are a bit too far towards the back so don’t really hear what the guide is saying",
-            "Follow the group without question",
-            " Make sure that everyone is able to hear properly",
-            "Are right up the front, adding your own comments in a loud voice",
-          ],
-        },
-        {
-          heading:
-            "During dinner parties at your home, you have a hard time with people who:",
-          options: [
-            " Ask you to tell a story in front of everyone else",
-            " Talk privately between themselves",
-            "Hang around you all evening",
-            "Always drag the conversation back to themselves",
-          ],
-        },
-        {
-          heading:
-            "You crack a joke at work, but nobody seems to have noticed. You:",
-          options: [
-            "Think it’s for the best — it was a lame joke anyway",
-            "Wait to share it with your friends after work",
-            "Try again a bit later with one of your colleagues",
-            "Keep telling it until they pay attention",
-          ],
+          question: "Q3. What are python modules?",
+          answers: {
+            a: "Are .py files with executable code",
+            b: "Python packages",
+            c: "Python list objects",
+            d: "Python packages",
+          },
+          correctAnswer: "a",
         },
       ],
     };
@@ -234,28 +219,25 @@ export default {
         this.e1--;
       }
     },
-    nextFunc() {
-      if (this.e1 < 5) {
-        this.e1++;
-      }
+
+    answered(e) {
+      this.selectedAnswer = e.target.value;
+      if (this.selectedAnswer == this.questions[this.index]["correctAnswer"])
+        this.correctAnswer++;
+      else this.wrongAnswer++;
     },
-    submitFunc() {
-      console.log(this.e1);
+    nextQuestion() {
+      this.index++;
+      this.selectedAnswer = "";
     },
-    getQuestion(index) {
-      return this.questions[index];
+    showResults() {
+      this.index++;
     },
-    getOption(index) {
-      return this.questions[index].options;
-    },
-    getHeading(index) {
-      return this.questions[index].heading;
-    },
-    getColumn() {
-      return this.column;
-    },
-    getE1() {
-      return this.e1;
+    resetQuiz() {
+      this.index = 0;
+      this.selectedAnswer = "";
+      this.correctAnswer = 0;
+      this.wrongAnswer = 0;
     },
   },
 };
