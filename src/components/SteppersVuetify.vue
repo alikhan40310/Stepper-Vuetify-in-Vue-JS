@@ -36,8 +36,8 @@
             minutes. You:
           </h1>
           <v-radio-group v-model="column" column >
-            <v-radio v-for="(score, index) in scores" :key="index"
-              label="1"
+            <v-radio 
+              label=""
               value="radio-1"
               v-model="score.value"
             ></v-radio>
