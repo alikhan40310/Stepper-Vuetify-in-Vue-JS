@@ -1,5 +1,5 @@
 <template>
-  <v-stepper v-model="e1">
+  <v-stepper v-model="e1" class=""  >
     <v-stepper-header>
       <v-stepper-step :complete="e1 > 1" step="1">
         Question no 1
@@ -226,19 +226,6 @@ export default {
         this.correctAnswer++;
       else this.wrongAnswer++;
     },
-    nextQuestion() {
-      this.index++;
-      this.selectedAnswer = "";
-    },
-    showResults() {
-      this.index++;
-    },
-    resetQuiz() {
-      this.index = 0;
-      this.selectedAnswer = "";
-      this.correctAnswer = 0;
-      this.wrongAnswer = 0;
-    },
   },
 };
 </script>
@@ -248,5 +235,17 @@ export default {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 20px;
+}
+.v-stepper{
+}
+.v-sheet.v-stepper:not(.v-sheet--outlined){
+  box-shadow:0px 3px 1px -2px transparent;
+  /* outline: none;  */
+  -webkit-box-shadow: 0px 3px 1px -2px transparent;
+  /* background: red; */
+}
+.v-stepper__content{
+  /* box shadow transparent */
+  box-shadow: 0px 3px 1px -2px transparent;
 }
 </style>
