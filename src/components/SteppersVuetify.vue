@@ -19,7 +19,7 @@
         :key="index"
         :step="index + 1"
       >
-        <h2>Question {{ index + 1 }}</h2>
+        <h2 class="gradient-color">Question {{ index + 1 }}</h2>
 
         <h2 class="heading-style">
           {{ question["question"] }}
@@ -37,35 +37,44 @@
           />
           <label :for="ansindex">{{ answer.option }}</label>
         </div>
-        <v-btn class="mt-4 mr-4" color="pink" text @click="backFunc">
-          Back
-        </v-btn>
-        <v-btn
-          v-model="nextButton"
-          class="mt-4"
-          @click="nextFunc"
-          color="#7b3aec"
-          v-if="index !== 4"
-          :disabled="disabled"
-        >
-          Next
-        </v-btn>
+        <div class="btnStyle">
+          <v-btn
+            class="mt-4 mr-4"
+            color="white"
+            text
+            @click="backFunc"
+            v-if="index !== 0"
+          >
+            Back
+          </v-btn>
+          <v-btn
+            v-model="nextButton"
+            class="mt-4"
+            @click="nextFunc"
+            color="#7b3aec"
+            v-if="index !== 4"
+            :disabled="disabled"
+          >
+            Next
+          </v-btn>
 
-        <v-btn
-          v-model="finishButton"
-          class="mt-4 ml-4"
-          @click="finishFunc"
-          color="#7b3aec"
-          v-if="index === 4"
-        >
-          Finish
-        </v-btn>
+          <v-btn
+            v-model="finishButton"
+            class="mt-4 ml-4"
+            @click="finishFunc"
+            color="#7b3aec"
+            v-if="index === 4"
+          >
+            Finish
+          </v-btn>
+        </div>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
 </template>
 
 <script>
+import { allQuestions } from "../constants/data";
 export default {
   name: "App",
   data() {
@@ -78,98 +87,7 @@ export default {
       disabled: true,
       finishButton: "",
       result: 0,
-      questions: [
-        {
-          question:
-            "You’re really busy at work and a colleague is telling you their life story and personal woes. You:Q1. Who create python language?",
-          selectedAns: "",
-          answers: [
-            { option: "Don’t dare to interrupt them", value: 10 },
-            {
-              option:
-                "Think it’s more important to give them some of your time; work can wait",
-              value: 2,
-            },
-            { option: "Listen, but with only with half an ear", value: 3 },
-            {
-              option:
-                "Interrupt and explain that you are really busy at the moment",
-              value: 4,
-            },
-          ],
-        },
-        {
-          question:
-            "You’ve been sitting in the doctor’s waiting room for more than 25 minutes. You:",
-          selectedAns: "",
-          answers: [
-            { option: "Look at your watch every two minutes", value: 1 },
-            { option: "Bubble with inner anger, but keep quiet", value: 2 },
-            {
-              option:
-                "Explain to other equally impatient people in the room that the doctor is always running late",
-              value: 3,
-            },
-            {
-              option:
-                "Complain in a loud voice, while tapping your foot impatiently",
-              value: 4,
-            },
-          ],
-        },
-        {
-          question:
-            "You’re having an animated discussion with a colleague regarding a project that you’re in charge of. You:",
-          selectedAns: "",
-          answers: [
-            { option: "Don’t dare contradict them", value: 1 },
-            { option: "Think that they are obviously right", value: 2 },
-            {
-              option: "Defend your own point of view, tooth and nail",
-              value: 3,
-            },
-            { option: "Continuously interrupt your colleague", value: 4 },
-          ],
-        },
-        {
-          question: "You are taking part in a guided tour of a museum. You:",
-          selectedAns: "",
-          answers: [
-            {
-              option:
-                "Are a bit too far towards the back so don’t really hear what the guide is saying",
-              value: 1,
-            },
-            { option: "Follow the group without question", value: 2 },
-            {
-              option: "Make sure that everyone is able to hear properly",
-              value: 3,
-            },
-            {
-              option:
-                "Are right up the front, adding your own comments in a loud voice",
-              value: 4,
-            },
-          ],
-        },
-        {
-          question:
-            "During dinner parties at your home, you have a hard time with people who:",
-          selectedAns: "",
-          answers: [
-            {
-              option: "Ask you to tell a story in front of everyone else",
-              value: 1,
-            },
-            { option: "Talk privately between themselves", value: 2 },
-            { option: "Hang around you all evening", value: 3 },
-            {
-              option: "Always drag the conversation back to themselves",
-              value: 4,
-            },
-          ],
-        },
-      ],
+      questions: allQuestions,
     };
   },
   methods: {
@@ -198,6 +116,7 @@ export default {
       for (let i = 0; i < this.questions.length; i++) {
         this.result = this.result + this.questions[i].selectedAns;
       }
+      // if the result is greater than or equal to 15 then it's extrovert
       console.log(this.result);
       if (this.result > 15) {
         alert("you're extrovert ");
@@ -211,13 +130,14 @@ export default {
 
 <style>
 body {
-  background-color: #7b3aec;
+  background-image: linear-gradient(320deg, #e47b3a 10%, #e94057 40%, #8a2387 80%);
+
 }
 .v-application {
-  background-color: #7b3aec;
+  background-color: transparent !important;
 }
 .v-main {
-  background-color: #7b3aec;
+  background-color: transparent !important;
 }
 .text {
   font-size: 1.5rem;
@@ -225,17 +145,46 @@ body {
   margin-bottom: 20px;
 }
 .v-stepper {
-  background-color: #7b3aec;
+  background-color: transparent !important;
 }
 .v-main__wrap {
-  background-color: #7b3aec;
+  background-color: transparent !important;
+}
+.btnStyle {
+  /* position: absolute; */
+  /* top: 20rem; */
+  /* background-color: #fff; */
 }
 .v-sheet.v-stepper:not(.v-sheet--outlined) {
   box-shadow: 0 0 0 0 transparent !important;
+  background-color: transparent !important;
+
+  background-size: cover;
+  border-radius: 1rem;
 }
 .v-stepper__content {
-  /* box shadow transparent */
+  color: white;
+  /* background-image: linear-gradient(320deg, #f27121, #e94057, #8a2387); */
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  margin-top: 2rem;
+  width: 1vw;
+
+}
+.v-stepper__items{
+  width:100%;
+}
+.v-stepper__header {
   box-shadow: 0 0 0 0 transparent !important;
+  color: #fff !important;
+}
+.v-stepper__label {
+  color: #fff !important;
+  font-size: 1.5rem;
 }
 .v-btn {
   color: #fff !important;
@@ -255,12 +204,23 @@ label {
 .heading-style {
   font-size: 1.5rem;
   font-weight: normal;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.4rem;
 }
 .CusStyle {
   background-color: white !important;
   box-shadow: 0 0 0 0 transparent !important;
   margin: 20vh auto;
-  width: 60%;
+  width: 70%;
+}
+.gradient-color {
+  /* background: linear-gradient(315deg, #fce043 0%, #fb7ba2 74%); */
+  /* background-color: #fce043; */
+  /* add new gradiant color */
+  /* background-image: linear-gradient(315deg, #fce043 10%, rgb(112, 134, 228) 74%); */
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  /* -webkit-text-fill-color: transparent; */
+  color: white;
 }
 </style>
