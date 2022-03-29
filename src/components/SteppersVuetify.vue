@@ -28,7 +28,7 @@
             type="radio"
             :value="answer.value"
             name="answer"
-            v-model="selectedAnswer"
+            v-model="question.selectedAns"
             class="radioStyle"
           />
           <label :for="ansindex">{{ answer.option }}</label>
@@ -41,8 +41,19 @@
           class="mt-4"
           @click="nextFunc"
           color="primary"
+          v-if="index !== 4"
         >
           Next
+        </v-btn>
+
+        <v-btn
+          v-model="finishButton"
+          class="mt-4 ml-4"
+          @click="finishFunc"
+          color="primary"
+          v-if="index === 4"
+        >
+          Finish
         </v-btn>
       </v-stepper-content>
     </v-stepper-items>
@@ -61,10 +72,13 @@ export default {
       // disable next button
       nextButton: false,
       disabled: true,
+      finishButton: "",
+      result: 0,
       questions: [
         {
           question:
             "Q1. You’re really busy at work and a colleague is telling you their life story and personal woes. You:Q1. Who create python language?",
+          selectedAns: "",
           answers: [
             { option: "Don’t dare to interrupt them", value: 10 },
             {
@@ -83,6 +97,7 @@ export default {
         {
           question:
             "Q2. You’ve been sitting in the doctor’s waiting room for more than 25 minutes. You:",
+          selectedAns: "",
           answers: [
             { option: "Look at your watch every two minutes", value: 1 },
             { option: "Bubble with inner anger, but keep quiet", value: 2 },
@@ -101,6 +116,7 @@ export default {
         {
           question:
             "Q3. You’re having an animated discussion with a colleague regarding a project that you’re in charge of. You:",
+          selectedAns: "",
           answers: [
             { option: "Don’t dare contradict them", value: 1 },
             { option: "Think that they are obviously right", value: 2 },
@@ -114,6 +130,7 @@ export default {
         {
           question:
             "Q4. You are taking part in a guided tour of a museum. You:",
+          selectedAns: "",
           answers: [
             {
               option:
@@ -135,6 +152,7 @@ export default {
         {
           question:
             "Q5. During dinner parties at your home, you have a hard time with people who:",
+          selectedAns: "",
           answers: [
             {
               option: "Ask you to tell a story in front of everyone else",
@@ -169,9 +187,17 @@ export default {
       if (this.e1 < this.questions.length) {
         this.e1++;
       }
+
       this.disabled = true;
       this.ValueArray.push(this.selectedAnswer);
-      console.log(this.ValueArray);
+    },
+    finishFunc() {
+      // finish button
+      // let sum = 0;
+      for (let i = 0; i < this.questions.length; i++) {
+        this.result = this.result + this.questions[i].selectedAns;
+      }
+      console.log(this.result);
     },
   },
 };
