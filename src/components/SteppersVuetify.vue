@@ -1,11 +1,12 @@
 <template>
-  <v-stepper v-model="e1" class="mt-10">
+  <v-stepper v-model="e1" class="CusStyle">
     <v-stepper-header>
       <v-stepper-step
         :complete="e1 > index + 1"
         v-for="(question, index) in questions"
         :key="index"
         :step="index + 1"
+        color="#7b3aec"
       >
         Question no {{ index + 1 }}
         <v-divider></v-divider>
@@ -18,6 +19,8 @@
         :key="index"
         :step="index + 1"
       >
+        <h2>Question {{ index + 1 }}</h2>
+
         <h2 class="heading-style">
           {{ question["question"] }}
         </h2>
@@ -30,18 +33,20 @@
             name="answer"
             v-model="question.selectedAns"
             class="radioStyle"
+            @change="gettingValue"
           />
           <label :for="ansindex">{{ answer.option }}</label>
         </div>
-        <v-btn class="mt-4 mr-4" color="#2196f3" text @click="backFunc">
+        <v-btn class="mt-4 mr-4" color="pink" text @click="backFunc">
           Back
         </v-btn>
         <v-btn
           v-model="nextButton"
           class="mt-4"
           @click="nextFunc"
-          color="primary"
+          color="#7b3aec"
           v-if="index !== 4"
+          :disabled="disabled"
         >
           Next
         </v-btn>
@@ -50,7 +55,7 @@
           v-model="finishButton"
           class="mt-4 ml-4"
           @click="finishFunc"
-          color="primary"
+          color="#7b3aec"
           v-if="index === 4"
         >
           Finish
@@ -69,7 +74,6 @@ export default {
       index: 0,
       selectedAnswer: "",
       ValueArray: [],
-      // disable next button
       nextButton: false,
       disabled: true,
       finishButton: "",
@@ -77,7 +81,7 @@ export default {
       questions: [
         {
           question:
-            "Q1. You’re really busy at work and a colleague is telling you their life story and personal woes. You:Q1. Who create python language?",
+            "You’re really busy at work and a colleague is telling you their life story and personal woes. You:Q1. Who create python language?",
           selectedAns: "",
           answers: [
             { option: "Don’t dare to interrupt them", value: 10 },
@@ -96,7 +100,7 @@ export default {
         },
         {
           question:
-            "Q2. You’ve been sitting in the doctor’s waiting room for more than 25 minutes. You:",
+            "You’ve been sitting in the doctor’s waiting room for more than 25 minutes. You:",
           selectedAns: "",
           answers: [
             { option: "Look at your watch every two minutes", value: 1 },
@@ -115,7 +119,7 @@ export default {
         },
         {
           question:
-            "Q3. You’re having an animated discussion with a colleague regarding a project that you’re in charge of. You:",
+            "You’re having an animated discussion with a colleague regarding a project that you’re in charge of. You:",
           selectedAns: "",
           answers: [
             { option: "Don’t dare contradict them", value: 1 },
@@ -128,8 +132,7 @@ export default {
           ],
         },
         {
-          question:
-            "Q4. You are taking part in a guided tour of a museum. You:",
+          question: "You are taking part in a guided tour of a museum. You:",
           selectedAns: "",
           answers: [
             {
@@ -151,7 +154,7 @@ export default {
         },
         {
           question:
-            "Q5. During dinner parties at your home, you have a hard time with people who:",
+            "During dinner parties at your home, you have a hard time with people who:",
           selectedAns: "",
           answers: [
             {
@@ -178,8 +181,7 @@ export default {
     gettingValue() {
       //  enable next button
       this.disabled = false;
-
-      console.log(this.selectedAnswer);
+      console.log(this.questions[this.index].selectedAns);
     },
     nextFunc() {
       // console.log(this.ValueArray);
@@ -193,33 +195,50 @@ export default {
     },
     finishFunc() {
       // finish button
-      // let sum = 0;
       for (let i = 0; i < this.questions.length; i++) {
         this.result = this.result + this.questions[i].selectedAns;
       }
       console.log(this.result);
+      if (this.result > 15) {
+        alert("you're extrovert ");
+      } else {
+        alert("you're introvert");
+      }
     },
   },
 };
 </script>
 
 <style>
+body {
+  background-color: #7b3aec;
+}
+.v-application {
+  background-color: #7b3aec;
+}
+.v-main {
+  background-color: #7b3aec;
+}
 .text {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 20px;
 }
 .v-stepper {
+  background-color: #7b3aec;
+}
+.v-main__wrap {
+  background-color: #7b3aec;
 }
 .v-sheet.v-stepper:not(.v-sheet--outlined) {
-  box-shadow: 0px 3px 1px -2px transparent;
-  /* outline: none;  */
-  -webkit-box-shadow: 0px 3px 1px -2px transparent;
-  /* background: red; */
+  box-shadow: 0 0 0 0 transparent !important;
 }
 .v-stepper__content {
   /* box shadow transparent */
-  box-shadow: 0px 3px 1px -2px transparent;
+  box-shadow: 0 0 0 0 transparent !important;
+}
+.v-btn {
+  color: #fff !important;
 }
 .radioStyle {
   margin-right: 10px;
@@ -227,7 +246,7 @@ export default {
   width: 1.2rem;
   height: 1.2rem;
   border-radius: 50%;
-  accent-color: #2196f3;
+  accent-color: #7b3aec;
   margin-top: 0.5rem;
 }
 label {
@@ -235,7 +254,13 @@ label {
 }
 .heading-style {
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: normal;
   margin-bottom: 1rem;
+}
+.CusStyle {
+  background-color: white !important;
+  box-shadow: 0 0 0 0 transparent !important;
+  margin: 20vh auto;
+  width: 60%;
 }
 </style>
