@@ -67,6 +67,24 @@
           >
             Finish
           </v-btn>
+          <v-dialog
+            v-model="dialog"
+            persistent
+            max-width="290"
+            v-if="result > 15"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                Open Dialog
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="text-h5">
+                Use Google's location service?
+              </v-card-title>
+              <v-card-text>You're extrovert</v-card-text>
+            </v-card>
+          </v-dialog>
         </div>
       </v-stepper-content>
     </v-stepper-items>
@@ -130,8 +148,12 @@ export default {
 
 <style>
 body {
-  background-image: linear-gradient(320deg, #e47b3a 10%, #e94057 40%, #8a2387 80%);
-
+  background-image: linear-gradient(
+    320deg,
+    #e47b3a 10%,
+    #e94057 40%,
+    #8a2387 80%
+  );
 }
 .v-application {
   background-color: transparent !important;
@@ -173,10 +195,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
   margin-top: 2rem;
   width: 1vw;
-
 }
-.v-stepper__items{
-  width:100%;
+.v-stepper__items {
+  width: 100%;
 }
 .v-stepper__header {
   box-shadow: 0 0 0 0 transparent !important;
