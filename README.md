@@ -1,4 +1,7 @@
-# ui-todos
+# Vuetify Stepper
+
+## Introvert & Extrovert
+user can give the answer of few question if the score are more then 15 then it'll be extrovert else it'll be introvert
 
 ## Project setup
 ```

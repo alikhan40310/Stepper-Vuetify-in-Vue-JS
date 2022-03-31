@@ -11,7 +11,7 @@
         Question no {{ index + 1 }}
         <v-divider></v-divider>
       </v-stepper-step>
-    </v-stepper-header>
+    </v-stepper-header> 
 
     <v-stepper-items>
       <v-stepper-content
