@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-app>
-       
-     
-
       <v-main>
         <!-- <HelloWorld />
-        <Form /> -->
-        <SteppersVuetify />
+        <Form />-->
+        <!-- <SteppersVuetify /> -->
+        <PersonalityIntroduction />
+        
+        <router-view></router-view>
       </v-main>
     </v-app>
   </v-container>
@@ -18,7 +18,8 @@
 // import component form
 // import Form from "./components/Form";
 // import steppersvuetify
-import SteppersVuetify from "./components/SteppersVuetify";
+// import SteppersVuetify from "./components/SteppersVuetify";
+import PersonalityIntroduction from "./views/Introduction";
 
 
 export default {
@@ -27,8 +28,9 @@ export default {
   components: {
     // HelloWorld,
     // Form,
-    SteppersVuetify,
-    
+    // SteppersVuetify,
+    PersonalityIntroduction,
+
   },
 
   data: () => ({
@@ -37,8 +39,7 @@ export default {
 };
 </script>
 <style>
-  .containers{
-    background: coral;
-    max-width: 70%;
-  }
+.containers {
+
+}
 </style>

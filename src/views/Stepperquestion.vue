@@ -11,7 +11,7 @@
         Question no {{ index + 1 }}
         <v-divider></v-divider>
       </v-stepper-step>
-    </v-stepper-header> 
+    </v-stepper-header>
 
     <v-stepper-items>
       <v-stepper-content
@@ -67,24 +67,6 @@
           >
             Finish
           </v-btn>
-          <v-dialog
-            v-model="dialog"
-            persistent
-            max-width="290"
-            v-if="result > 15"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                Open Dialog
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title class="text-h5">
-                Use Google's location service?
-              </v-card-title>
-              <v-card-text>You're extrovert</v-card-text>
-            </v-card>
-          </v-dialog>
         </div>
       </v-stepper-content>
     </v-stepper-items>
@@ -94,7 +76,13 @@
 <script>
 import { allQuestions } from "../constants/data";
 export default {
-  name: "App",
+  name: "StepperQuestion",
+  props: {
+   Introduction: {
+     type: String,
+     required: true
+   },
+  },
   data() {
     return {
       e1: 1,
@@ -106,6 +94,7 @@ export default {
       finishButton: "",
       result: 0,
       questions: allQuestions,
+      dialog: false,
     };
   },
   methods: {
@@ -137,16 +126,16 @@ export default {
       // if the result is greater than or equal to 15 then it's extrovert
       console.log(this.result);
       if (this.result > 15) {
-        alert("you're extrovert ");
+        this.dialog = true;
       } else {
-        alert("you're introvert");
+        this.dialog = false;
       }
     },
   },
 };
 </script>
 
-<style>
+<style >
 body {
   background-image: linear-gradient(
     320deg,
