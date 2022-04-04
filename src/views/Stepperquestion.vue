@@ -14,17 +14,8 @@
     </v-stepper-header>
 
     <v-stepper-items>
-      <v-stepper-content
-        v-for="(question, index) in questions"
-        :key="index"
-        :step="index + 1"
-      >
-        <h2 class="gradient-color">Question {{ index + 1 }}</h2>
-
-        <h2 class="heading-style">
-          {{ question["question"] }}
-        </h2>
-
+      <v-stepper-content v-for="(question, index) in questions" :key="index" :step="index + 1">
+        <h2 class="heading-style">{{ question["question"] }}</h2>
         <div v-for="(answer, ansindex) in question.answers" :key="ansindex">
           <input
             :id="ansindex"
@@ -38,15 +29,7 @@
           <label :for="ansindex">{{ answer.option }}</label>
         </div>
         <div class="btnStyle">
-          <v-btn
-            class="mt-4 mr-4"
-            color="white"
-            text
-            @click="backFunc"
-            v-if="index !== 0"
-          >
-            Back
-          </v-btn>
+          <v-btn class="mt-4 mr-4" color="white" text @click="backFunc" v-if="index !== 0">Back</v-btn>
           <v-btn
             v-model="nextButton"
             class="mt-4"
@@ -54,9 +37,7 @@
             color="#7b3aec"
             v-if="index !== 4"
             :disabled="disabled"
-          >
-            Next
-          </v-btn>
+          >Next</v-btn>
 
           <v-btn
             v-model="finishButton"
@@ -64,9 +45,7 @@
             @click="finishFunc"
             color="#7b3aec"
             v-if="index === 4"
-          >
-            Finish
-          </v-btn>
+          >Finish</v-btn>
         </div>
       </v-stepper-content>
     </v-stepper-items>
@@ -78,10 +57,10 @@ import { allQuestions } from "../constants/data";
 export default {
   name: "StepperQuestion",
   props: {
-   Introduction: {
-     type: String,
-     required: true
-   },
+    Introduction: {
+      type: String,
+      required: true
+    },
   },
   data() {
     return {
@@ -95,6 +74,7 @@ export default {
       result: 0,
       questions: allQuestions,
       dialog: false,
+      message: "",
     };
   },
   methods: {
@@ -125,11 +105,7 @@ export default {
       }
       // if the result is greater than or equal to 15 then it's extrovert
       console.log(this.result);
-      if (this.result > 15) {
-        this.dialog = true;
-      } else {
-        this.dialog = false;
-      }
+      this.$router.push('/result/' + this.result);
     },
   },
 };
@@ -162,9 +138,6 @@ body {
   background-color: transparent !important;
 }
 .btnStyle {
-  /* position: absolute; */
-  /* top: 20rem; */
-  /* background-color: #fff; */
 }
 .v-sheet.v-stepper:not(.v-sheet--outlined) {
   box-shadow: 0 0 0 0 transparent !important;
@@ -175,7 +148,6 @@ body {
 }
 .v-stepper__content {
   color: white;
-  /* background-image: linear-gradient(320deg, #f27121, #e94057, #8a2387); */
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
   backdrop-filter: blur(10px) saturate(150%) !important;
@@ -224,13 +196,8 @@ label {
   width: 70%;
 }
 .gradient-color {
-  /* background: linear-gradient(315deg, #fce043 0%, #fb7ba2 74%); */
-  /* background-color: #fce043; */
-  /* add new gradiant color */
-  /* background-image: linear-gradient(315deg, #fce043 10%, rgb(112, 134, 228) 74%); */
   background-clip: border-box;
   -webkit-background-clip: text;
-  /* -webkit-text-fill-color: transparent; */
   color: white;
 }
 </style>

@@ -7,23 +7,18 @@ import PersonalityEvaluation from "./views/Result.vue";
 import StepperQuestion from "./views/Stepperquestion.vue";
 
 
-
-
 Vue.use(Router);
-
 
 const routes = [
   { path: "", component: PersonalityIntroduction },
   { path: "/question", component: StepperQuestion },
 
-  { path: "/result", component: PersonalityEvaluation },
+  { path: "/result/:id", component: PersonalityEvaluation },
 ];
 
 const router = new Router({
   routes
 });
-
-
 Vue.config.productionTip = false
 
 new Vue({

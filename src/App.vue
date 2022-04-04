@@ -5,7 +5,7 @@
         <!-- <HelloWorld />
         <Form />-->
         <!-- <SteppersVuetify /> -->
-        <PersonalityIntroduction />
+        <!-- <PersonalityIntroduction /> -->
         
         <router-view></router-view>
       </v-main>
@@ -19,7 +19,7 @@
 // import Form from "./components/Form";
 // import steppersvuetify
 // import SteppersVuetify from "./components/SteppersVuetify";
-import PersonalityIntroduction from "./views/Introduction";
+// import PersonalityIntroduction from "./views/Introduction";
 
 
 export default {
@@ -29,7 +29,7 @@ export default {
     // HelloWorld,
     // Form,
     // SteppersVuetify,
-    PersonalityIntroduction,
+    // PersonalityIntroduction,
 
   },
 
