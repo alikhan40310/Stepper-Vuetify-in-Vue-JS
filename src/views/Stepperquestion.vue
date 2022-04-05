@@ -18,22 +18,28 @@
         <h2 class="heading-style">{{ question["question"] }}</h2>
         <div v-for="(answer, ansindex) in question.answers" :key="ansindex">
           <input
-            :id="ansindex"
+            :id="'-question-' + index + '-option-' + ansindex"
             type="radio"
-            :value="answer.value"
-            name="answer"
+            v-bind:value="answer.value"
+            v-bind:name="'-question-' + index"
             v-model="question.selectedAns"
             class="radioStyle"
-            @change="gettingValue"
+            @change="gettingValue()"
           />
-          <label :for="ansindex">{{ answer.option }}</label>
+          <label :for="'-question-' + index + '-option-' + ansindex">{{ answer.option }}</label>
         </div>
         <div class="btnStyle">
-          <v-btn class="mt-4 mr-4" color="white" text @click="backFunc" v-if="index !== 0">Back</v-btn>
+          <v-btn
+            class="mt-4 mr-4"
+            color="white"
+            text
+            @click="personalityBack"
+            v-if="index !== 0"
+          >Back</v-btn>
           <v-btn
             v-model="nextButton"
             class="mt-4"
-            @click="nextFunc"
+            @click="personalityNext"
             color="#7b3aec"
             v-if="index !== 4"
             :disabled="disabled"
@@ -42,7 +48,7 @@
           <v-btn
             v-model="finishButton"
             class="mt-4 ml-4"
-            @click="finishFunc"
+            @click="personalityResult"
             color="#7b3aec"
             v-if="index === 4"
           >Finish</v-btn>
@@ -73,39 +79,49 @@ export default {
       finishButton: "",
       result: 0,
       questions: allQuestions,
-      dialog: false,
       message: "",
+      selected: false,
     };
   },
   methods: {
-    backFunc() {
+    personalityBack() {
       if (this.e1 > 1) {
         this.e1--;
       }
+      this.disabled = false;
+
     },
     gettingValue() {
-      //  enable next button
-      this.disabled = false;
+
       console.log(this.questions[this.index].selectedAns);
+      // enable next button if the radio button is selected
+      if (this.questions[this.index].selectedAns !== "") {
+        this.disabled = false;
+      } else {
+        this.disabled = true;
+      }
+
     },
-    nextFunc() {
-      // console.log(this.ValueArray);
+    personalityNext() {
       // next step
       if (this.e1 < this.questions.length) {
         this.e1++;
       }
 
-      this.disabled = true;
+      // if the radio button is not selected then disable the next button
+
+
+
       this.ValueArray.push(this.selectedAnswer);
     },
-    finishFunc() {
+    personalityResult() {
       // finish button
       for (let i = 0; i < this.questions.length; i++) {
         this.result = this.result + this.questions[i].selectedAns;
       }
-      // if the result is greater than or equal to 15 then it's extrovert
-      console.log(this.result);
+      // moving result to the result page
       this.$router.push('/result/' + this.result);
+      console.log(this.result);
     },
   },
 };
