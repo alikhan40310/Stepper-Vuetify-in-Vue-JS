@@ -24,9 +24,11 @@
             v-bind:name="'-question-' + index"
             v-model="question.selectedAns"
             class="radioStyle"
-            @change="gettingValue()"
           />
-          <label :for="'-question-' + index + '-option-' + ansindex">{{ answer.option }}</label>
+          <label
+            class="font-weight-light"
+            :for="'-question-' + index + '-option-' + ansindex"
+          >{{ answer.option }}</label>
         </div>
         <div class="btnStyle">
           <v-btn
@@ -39,10 +41,10 @@
           <v-btn
             v-model="nextButton"
             class="mt-4"
-            @click="personalityNext"
+            @click="personalityNext()"
             color="#7b3aec"
             v-if="index !== 4"
-            :disabled="disabled"
+            v-bind:disabled="question.selectedAns === ''"
           >Next</v-btn>
 
           <v-btn
@@ -51,6 +53,7 @@
             @click="personalityResult"
             color="#7b3aec"
             v-if="index === 4"
+            v-bind:disabled="question.selectedAns === ''"
           >Finish</v-btn>
         </div>
       </v-stepper-content>
@@ -75,7 +78,6 @@ export default {
       selectedAnswer: "",
       ValueArray: [],
       nextButton: false,
-      disabled: true,
       finishButton: "",
       result: 0,
       questions: allQuestions,
@@ -88,30 +90,12 @@ export default {
       if (this.e1 > 1) {
         this.e1--;
       }
-      this.disabled = false;
-
-    },
-    gettingValue() {
-
-      console.log(this.questions[this.index].selectedAns);
-      // enable next button if the radio button is selected
-      if (this.questions[this.index].selectedAns !== "") {
-        this.disabled = false;
-      } else {
-        this.disabled = true;
-      }
-
     },
     personalityNext() {
       // next step
       if (this.e1 < this.questions.length) {
         this.e1++;
       }
-
-      // if the radio button is not selected then disable the next button
-
-
-
       this.ValueArray.push(this.selectedAnswer);
     },
     personalityResult() {
@@ -154,11 +138,11 @@ body {
   background-color: transparent !important;
 }
 .btnStyle {
+  margin-top: 0.5rem;
 }
 .v-sheet.v-stepper:not(.v-sheet--outlined) {
   box-shadow: 0 0 0 0 transparent !important;
   background-color: transparent !important;
-
   background-size: cover;
   border-radius: 1rem;
 }
