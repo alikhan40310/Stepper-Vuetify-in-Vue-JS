@@ -1,7 +1,5 @@
 ## Introvert/Extrovert Personality Test
-<<<<<<< HEAD
-
-A simple human personality test that guesses the user's personality based on survey questions. End result displays user's nature whether as Introvert or Extrovert.
+simple human personality test that guesses the user's personality based on survey questions. End result displays user's nature whether as Introvert or Extrovert.
 
 ## Stack
 The project primarily uses following technologies:
@@ -29,8 +27,6 @@ The project primarily uses following technologies:
 ![git2](https://user-images.githubusercontent.com/94684731/161928312-c7ded207-81e8-4c84-9a75-83c53c867a12.png)
 ![git3](https://user-images.githubusercontent.com/94684731/161928333-160b3263-a58d-48e4-bd5f-4b338f6f20cb.png)
 
-
->>>>>>> f6f68b3f38b212f0be609bc3723e0bd4c2f0aa15
 
 ## Project setup
 ```
