@@ -26,7 +26,7 @@
         color="warning"
         x-large
         class="mt-2 px-8 text-capitalize"
-        @click="routerOpen"
+        @click="mainRoute"
       >Let's Evaluate</v-btn>
     </v-flex>
   </v-card>
